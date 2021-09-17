@@ -2,11 +2,16 @@ import pygame
 from pygame.locals import *
 import time
 
+#初期化
 pygame.init()
+#画面の高さ
 screen_height = 300
+#画面の幅
 screen_width = 300
 line_width = 6
+#300 * 300の画面を作る
 screen = pygame.display.set_mode((screen_width, screen_height))
+#Tic Tac Toeという名前を付ける
 pygame.display.set_caption('Tic Tac Toe')
 
 #define colours
@@ -20,6 +25,7 @@ font = pygame.font.SysFont(None, 40)
 clicked = False
 player = 1
 pos = (0, 0)
+#〇×の初期状態
 markers = [ [0, 0, 0],
             [0, 0, 0],
             [0, 0, 0] ]
@@ -29,6 +35,7 @@ winner = 0
 
 again_rect = Rect(screen_width // 2 - 80, screen_height // 2, 160, 50)
 
+#盤をつくる
 def draw_board():
     bg = (0, 0, 0)
     grid = (255, 255, 255)
@@ -37,6 +44,7 @@ def draw_board():
         pygame.draw.line(screen, grid, (0, 100*x), (screen_width, 100*x), line_width)
         pygame.draw.line(screen, grid, (100*x, 0), (100*x, screen_height), line_width)
 
+#〇×を書く
 def draw_markers():
     y_pos = 0
     for x in markers:
@@ -50,7 +58,7 @@ def draw_markers():
             x_pos += 1
         y_pos += 1
 
-
+#ゲーム終了状態か確認する
 def check_game_over():
 	global game_over
 	global winner
@@ -93,6 +101,7 @@ def check_game_over():
 			game_over = True
 			winner = 0
 
+#ゲーム終了時の処理
 def draw_game_over(winner):
 
 	if winner != 0:
